@@ -4,6 +4,8 @@
 
 fragFrame is a quick way to create interesting patterns with frag shaders. It is currently in very early stages of development.
 
+![screenshot](screenshot.png)
+
 ## Requirements
 * GNU/Linux
 * make

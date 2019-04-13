@@ -56,7 +56,7 @@ shader_setup()
     ""
     "void main() {"
     "vec2 pos = pos_out.xy;"
-    "vec4 new_col = vec4(pos.x, 1.0, pos.y, 1.0);"
+    "vec4 new_col = vec4(sin(pos.x + time), sin(time), sin(pos.y + time), 1.0);"
     "gl_FragColor = new_col;"
     "}";
 
