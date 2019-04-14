@@ -10,6 +10,27 @@
 struct Callback_ptrs{
 };
 
+char* frag_read_file() {
+  FILE* file;
+  size_t size;
+  char* buffer;
+
+  file = fopen("shader.frag", "rb");
+  printf("ok\n");
+
+  fseek(file, 0L, SEEK_END);
+  size = ftell(file);
+  rewind(file);
+
+  buffer = malloc(size + 1);
+  fread(buffer, size, 1, file);
+
+  printf("2ok\n");
+
+  printf("%s\n", buffer);
+  return buffer;
+}
+
 GLuint
 shader_compile(const char* vs_raw, const char* fs_raw)
 {
@@ -32,7 +53,7 @@ shader_compile(const char* vs_raw, const char* fs_raw)
 }
 
 GLuint
-shader_setup()
+shader_setup(char* fs)
 {
   const char* vs =
     "#version 130\n"
@@ -48,7 +69,7 @@ shader_setup()
     "gl_Position = position;"
     "}";
 
-  const char* fs  =
+  const char* o_fs  =
     "#version 130\n"
     "in vec4 color_out;"
     "in vec4 pos_out;"
@@ -118,8 +139,10 @@ main(int argc, char **argv)
   //callb_ptrs.wv = world_view;
   //glfwSetWindowSizeCallback(window, window_size_callback);
   //
+  char* frag_shader = frag_read_file();
 
-  GLuint shader = shader_setup();
+  GLuint shader = shader_setup(frag_shader);
+
 
 
   /* Main loop */
