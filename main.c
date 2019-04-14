@@ -16,7 +16,6 @@ char* frag_read_file() {
   char* buffer;
 
   file = fopen("shader.frag", "rb");
-  printf("ok\n");
 
   fseek(file, 0L, SEEK_END);
   size = ftell(file);
@@ -25,9 +24,6 @@ char* frag_read_file() {
   buffer = malloc(size + 1);
   fread(buffer, size, 1, file);
 
-  printf("2ok\n");
-
-  printf("%s\n", buffer);
   return buffer;
 }
 
@@ -67,18 +63,6 @@ shader_setup(char* fs)
     "pos_out = position;"
     "color_out = color_in;"
     "gl_Position = position;"
-    "}";
-
-  const char* o_fs  =
-    "#version 130\n"
-    "in vec4 color_out;"
-    "in vec4 pos_out;"
-    "uniform float time;"
-    ""
-    "void main() {"
-    "vec2 pos = pos_out.xy;"
-    "vec4 new_col = vec4(sin(pos.x + time), sin(time), sin(pos.y + time), 1.0);"
-    "gl_FragColor = new_col;"
     "}";
 
   return shader_compile(vs, fs);
