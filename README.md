@@ -18,6 +18,10 @@ Install dependancies
 
 `sudo apt-get install libglfw3-dev entr`
 
+Make fragframe
+
+`make`
+
 Run fragframe
 
 `./fragframe_run.sh`
