@@ -6,7 +6,6 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-
 struct Callback_ptrs{
 };
 
@@ -85,14 +84,13 @@ void shader_draw(GLuint shader, float time)
   glUseProgram(0);
 }
 
-
 int
 main(int argc, char **argv)
 {
   GLFWwindow* window;
 
   // For passing structs between callbacks in glfw
-  struct Callback_ptrs callb_ptrs;
+  //struct Callback_ptrs callb_ptrs;
 
   /* Initalize glfw and glut*/
   if (!glfwInit())
@@ -115,8 +113,7 @@ main(int argc, char **argv)
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  srand((unsigned int)time(NULL));
-
+  //srand((unsigned int)time(NULL));
 
   /* Setup callbacks */
   //callb_ptrs.aa = agent_array;
@@ -126,8 +123,6 @@ main(int argc, char **argv)
   char* frag_shader = frag_read_file();
 
   GLuint shader = shader_setup(frag_shader);
-
-
 
   /* Main loop */
   while(!glfwWindowShouldClose(window))
