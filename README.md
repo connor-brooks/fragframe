@@ -24,3 +24,7 @@ Run fragframe
 
 Edit `shader.frag` and your frame will automatically update
 
+## Notes
+* If you are using vim and want syntax highlighting, add the following to your vimrc:
+
+`au BufReadPost *.frag set syntax=c`
