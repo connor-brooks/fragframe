@@ -99,7 +99,7 @@ main(int argc, char **argv)
     return -1; //exit
 
   /* Create window */
-  window = glfwCreateWindow(1600, 900, "fragEditor", NULL, NULL);
+  window = glfwCreateWindow(800, 600, "fragEditor", NULL, NULL);
   if (!window)
   {
     glfwTerminate();
