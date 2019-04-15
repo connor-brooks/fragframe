@@ -20,8 +20,12 @@ char* frag_read_file() {
   size = ftell(file);
   rewind(file);
 
-  buffer = malloc(size + 1);
+  buffer = calloc(1, size + 1);
   fread(buffer, size, 1, file);
+
+  fclose(file);
+
+  printf("Got shader:\n%s\n", buffer);
 
   return buffer;
 }
