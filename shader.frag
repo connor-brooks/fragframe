@@ -1,10 +1,16 @@
 #version 130
-in vec4 color_out;
-in vec4 pos_out;
 uniform float time;
+uniform vec2 mouse;
+uniform vec2 resolution;
 
 void main() {
-  vec2 pos = pos_out.xy;
-  vec4 new_col = vec4(sin(pos.x + time), sin(time), sin(pos.y + time), 1.0);
-  gl_FragColor = new_col;
+	vec2 st = gl_FragCoord.xy / resolution.xy;
+	float pct = 0.0;
+
+	pct = distance(st,mouse);
+
+	vec3 color = vec3(pct);
+	color = fract(color * 10 + fract(time * 2));
+
+	gl_FragColor = vec4( color, 1.0 );
 }
