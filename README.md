@@ -29,7 +29,7 @@ Run fragframe
 
 `./fragframe_run.sh`
 
-Edit `shader.frag` and your frame will automatically update
+Edit `shader.frag` and your frame will automatically update once you save
 
 ## Uniforms
 A number of useful uniform variables are provided in fragframe, these are as follows:
