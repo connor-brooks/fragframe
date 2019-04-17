@@ -7,7 +7,7 @@ LIBS=-lGL -lm -lglfw -lGLEW
 
 
 fragframe: main.o
-	$(CC) $(CFLAGS) $(LIBS) main.o -o fragframe
+	$(CC) $(CFLAGS) main.o -o fragframe $(LIBS) 
 
 main.o: main.c
 	$(CC) -c main.c
