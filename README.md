@@ -12,12 +12,14 @@ fragFrame is a quick way to create interesting patterns with frag shaders. It is
 * gcc
 * libglfw3
 * libglfw3-dev
+* libglew2.0
+* libglew-dev
 * entr
 
 ## How to use
 Install dependancies
 
-`sudo apt-get install libglfw3 libglfw3-dev entr`
+`sudo apt-get install libglfw3 libglfw3-dev libglew2.0 libglew-dev entr`
 
 Make fragframe
 
