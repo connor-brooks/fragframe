@@ -71,13 +71,18 @@ shader_setup(char* fs)
   return shader_compile(vs, fs);
 }
 
-void shader_draw(GLuint shader, float time)
+void shader_draw(GLuint shader, float time, double mousex, double mousey)
 {
+
   glColor3f(0.0, 1.0, 0.0);
   glUseProgram(shader);
+  printf("x %f, y %f\n", mousex, mousey);
 
-  GLuint loc = glGetUniformLocation(shader, "time");
-  glUniform1f(loc, time);
+  GLuint u_time = glGetUniformLocation(shader, "time");
+  glUniform1f(u_time, time);
+
+  GLuint u_mouse = glGetUniformLocation(shader, "mouse");
+  glUniform2f(u_mouse, mousex, mousey);
 
   glBegin(GL_QUADS);
   glVertex3f(-1.0f, -1.0f, 0.0f);
@@ -133,13 +138,18 @@ main(int argc, char **argv)
   {
     /* Set the viewport & grab scale*/
     int width, height;
+    double mousex, mousey;
     glfwGetFramebufferSize(window, &width, &height);
+    glfwGetCursorPos(window, &mousex, &mousey);
     glViewport(0, 0, width, height);
+
+    mousex = mousex/width;
+    mousey = mousey/height;
 
     /* Clear*/
     glClear(GL_COLOR_BUFFER_BIT);
 
-    shader_draw(shader, glfwGetTime());
+    shader_draw(shader, glfwGetTime(), mousex, mousey);
 
     glfwSwapBuffers(window);
     /* Poll for events */
