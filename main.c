@@ -79,13 +79,13 @@ void shader_draw(GLuint shader, float time,
 	glColor3f(0.0, 1.0, 0.0);
 	glUseProgram(shader);
 
-	GLuint u_time = glGetUniformLocation(shader, "time");
+	GLuint u_time = glGetUniformLocation(shader, "u_time");
 	glUniform1f(u_time, time);
 
-	GLuint u_mouse = glGetUniformLocation(shader, "mouse");
+	GLuint u_mouse = glGetUniformLocation(shader, "u_mouse");
 	glUniform2f(u_mouse, mousex, mousey);
 
-	GLuint u_resolution = glGetUniformLocation(shader, "resolution");
+	GLuint u_resolution = glGetUniformLocation(shader, "u_resolution");
 	glUniform2f(u_resolution, width, height);
 
 	printf("Attempting to draw shader!\n");
