@@ -88,7 +88,6 @@ void shader_draw(GLuint shader, float time,
 	GLuint u_resolution = glGetUniformLocation(shader, "u_resolution");
 	glUniform2f(u_resolution, width, height);
 
-	printf("Attempting to draw shader!\n");
 
 	glBegin(GL_QUADS);
 	glVertex3f(-1.0f, -1.0f, 0.0f);
@@ -138,6 +137,10 @@ main(int argc, char **argv)
 	char* frag_shader = frag_read_file();
 
 	GLuint shader = shader_setup(frag_shader);
+
+	printf("Attempting to draw shader!\n");
+	printf("A green screen suggests an error with your shader\n");
+	printf("Make sure to use GLSL version 130\n");
 
 	/* Main loop */
 	while(!glfwWindowShouldClose(window))

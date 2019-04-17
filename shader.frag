@@ -10,7 +10,7 @@ void main() {
 	pct = distance(st,u_mouse);
 
 	vec3 color = vec3(pct);
-	color = fract(color * 10 + fract(u_time * 2));
+	color = fract(color * 10 + fract(u_time));
 
 	gl_FragColor = vec4( color, 1.0 );
 }
