@@ -65,15 +65,9 @@ shader_setup(char* fs)
   const char* vs =
     "#version 130\n"
     "in vec4 position;"
-    "in vec4 color_in;"
-    "uniform float time;"
-    "out vec4 color_out;"
-    "out vec4 pos_out;"
     ""
     "void main() {"
-    "pos_out = position;"
-    "color_out = color_in;"
-    "gl_Position = position;"
+    " gl_Position = position;"
     "}";
 
   return shader_compile(vs, fs);
@@ -108,15 +102,12 @@ main(int argc, char **argv)
 {
   GLFWwindow* window;
 
-  // For passing structs between callbacks in glfw
-  //struct Callback_ptrs callb_ptrs;
-
   /* Initalize glfw and glut*/
   if (!glfwInit())
     return -1; //exit
 
   /* Create window */
-  window = glfwCreateWindow(800, 600, "fragEditor", NULL, NULL);
+  window = glfwCreateWindow(800, 600, "fragFrame", NULL, NULL);
   if (!window)
   {
     glfwTerminate();
@@ -162,6 +153,5 @@ main(int argc, char **argv)
 
     glfwPollEvents();
   }
-
   return 0;
 }
