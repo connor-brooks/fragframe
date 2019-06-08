@@ -5,6 +5,7 @@
 #include <string.h>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#define DEBUG
 
 typedef struct _Uniforms Uniforms;
 
@@ -17,23 +18,46 @@ struct _Uniforms {
   double u_mouse[2];
 };
 
-char* frag_read_file() {
+void
+frag_print(char* buffer)
+{
+  printf("\x1B[32m");
+  printf("Got shader:\n%s", buffer);
+  printf("\x1B[0m");
+  printf("===\n");
+}
+
+
+char*
+frag_read_file() {
   FILE* file;
   size_t size;
   char* buffer;
 
   file = fopen("shader.frag", "rb");
 
+  if(file == NULL) {
+    perror("ERROR: ");
+    exit(1);
+  }
+
   fseek(file, 0L, SEEK_END);
   size = ftell(file);
   rewind(file);
 
   buffer = calloc(1, size + 1);
-  fread(buffer, size, 1, file);
 
+  if(buffer == NULL) {
+    perror("ERROR: ");
+    exit(1);
+  }
+
+  fread(buffer, size, 1, file);
   fclose(file);
 
-  printf("Got shader:\n%s\n", buffer);
+#ifdef DEBUG
+  frag_print(buffer);
+#endif
 
   return buffer;
 }
@@ -75,7 +99,6 @@ shader_setup(char* fs)
 
 void shader_draw(GLuint shader, Uniforms uniforms)
 {
-
   glColor3f(0.0, 1.0, 0.0);
   glUseProgram(shader);
 
@@ -101,12 +124,14 @@ int
 main(int argc, char **argv)
 {
   GLFWwindow* window;
+  char* frag_shader;
 
   /* Initalize glfw and glut*/
   if (!glfwInit())
     return -1; //exit
 
   /* Create window */
+  glfwWindowHint(GLFW_FOCUSED, GLFW_FALSE);
   window = glfwCreateWindow(800, 600, "fragFrame", NULL, NULL);
   if (!window)
   {
@@ -124,20 +149,21 @@ main(int argc, char **argv)
 
   Uniforms uniforms;
 
-  char* frag_shader = frag_read_file();
+  frag_shader = frag_read_file();
 
   GLuint shader = shader_setup(frag_shader);
 
+  printf("\x1B[31m");
   printf("Attempting to draw shader!\n");
-  printf("A green screen suggests an error with your shader\n");
-  printf("Make sure to use GLSL version 130\n");
+  printf("\x1B[0m");
+  printf("===\n");
 
   /* Main loop */
   while(!glfwWindowShouldClose(window))
   {
     /* Set the uniforms */
-    glfwGetFramebufferSize(window, 
-        &(uniforms.u_resolution[0]), 
+    glfwGetFramebufferSize(window,
+        &(uniforms.u_resolution[0]),
         &(uniforms.u_resolution[1]));
     glfwGetCursorPos(window, &(uniforms.u_mouse[0]), &(uniforms.u_mouse[1]));
     uniforms.u_time = glfwGetTime();
