@@ -19,6 +19,16 @@ struct _Uniforms {
 };
 
 void
+key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+  if(action == GLFW_PRESS || action == GLFW_REPEAT)
+  {
+    if(key == GLFW_KEY_Q) 
+      glfwSetWindowShouldClose(window, GLFW_TRUE);
+  }
+}
+
+void
 frag_print(char* buffer)
 {
   printf("\x1B[32m");
@@ -141,6 +151,9 @@ main(int argc, char **argv)
 
   /* Set the windows context */
   glfwMakeContextCurrent(window);
+
+  /* Set callbacks */
+  glfwSetKeyCallback(window, key_callback);
 
   /* initalize glew and do various gl setup */
   glewInit();
